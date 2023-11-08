@@ -11,23 +11,15 @@ module.exports = {
     extend: {
       backgroundImage: {},
       colors: {
-        "very-light-grayish-blue": "hsl(240, 78%, 98%)",
-        "light-grayish-blue": "hsl(234, 14%, 74%)",
-        "grayish-blue": "hsl(233, 13%, 49%)",
-        "dark-grayish-blue": "hsl(232, 13%, 33%)",
-        "light-blue": "hsl(236, 72%, 79%)",
-        "medium-blue-purple": "hsl(237, 63%, 64%)",
-      },
-      boxShadow: {
-        "3xl": "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-      },
-      linearGradientColors: {
-        "custom-gradient": ["hsl(236, 72%, 79%)", "hsl(237, 63%, 64%)"],
+        "very-dark-cyan": "hsl(183, 100%, 15%)",
+        "dark-grayish-cyan": "hsl(186, 14%, 43%)",
+        "grayish-cyan": "hsl(184, 14%, 56%)",
+        "light-grayish-cyan": "hsl(185, 41%, 84%)",
+        "very-light-grayish-cyan": "hsl(189, 41%, 97%)",
+        white: "hsl(0, 0%, 100%)",
       },
       fontFamily: {
-        cinzel: ["Cinzel", "serif"],
-        montserrat: ["Montserrat", "sans-serif"],
-        sedgwick: ["Sedgwick Ave Display", "cursive"],
+        mono: ["Space Mono", "monospace"],
       },
     },
   },
