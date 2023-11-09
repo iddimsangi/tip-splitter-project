@@ -32,14 +32,28 @@ function App() {
               </div>
             </div>
             <form className="flex flex-col bg-blue-500">
-              <label>Bill</label>
+              <label>Number of people</label>
               <div className="flex">
                 <img src={dollar} alt="dollar" />
-                <input type="number" value={889} className="w-full" />
+                <input type="number" value={0} className="w-full" />
               </div>
             </form>
           </div>
-          <div className=" bg-green-600 w-full p-1"></div>
+          <div className=" bg-green-600 w-full p-1 rounded-lg">
+            <div className=" bg-yellow-400 flex justify-between items-center mb-3">
+              <h2>
+                Tip Amount <span className=" block">/ person</span>
+              </h2>
+              <h1>$445</h1>
+            </div>
+            <div className=" bg-yellow-400 flex justify-between items-center mb-3">
+              <h2>
+                Total <span className=" block">/ person</span>
+              </h2>
+              <h1>$445</h1>
+            </div>
+            <button className=" bg-black w-full text-white">Reset</button>
+          </div>
         </div>
       </div>
     </di>
