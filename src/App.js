@@ -1,24 +1,16 @@
 import dollar from "./images/icon-dollar.svg";
+import personIcon from "./images/icon-person.svg";
+import Input from "./Input";
 function App() {
   return (
-    <di>
+    <div>
       <div className="bg-[#C3E5E9] h-screen flex flex-col justify-center items-center p-5">
         <h1 className="text-[#00484C] uppercase font-mono font-extrabold tracking-wide">
           Spli <span className="block">tter</span>
         </h1>
         <div className="bg-white p-6 mt-3  rounded shadow-lg min-w-full flex flex-col justify-center items-center space-y-3">
           <div className=" bg-red-700 w-full p-1 flex flex-col space-y-2">
-            <form className="flex flex-col">
-              <label className=" font-mono text-very-dark-cyan">Bill</label>
-              <div className="flex items-center bg-[#F3F8FB] p-2 rounded">
-                <img src={dollar} className=" ml-3" alt="dollar" />
-                <input
-                  type="text"
-                  value={889}
-                  className="w-full bg-transparent font-extrabold text-xl text-right font-mono text-very-dark-cyan outline-none"
-                />
-              </div>
-            </form>
+            <Input labelText="Bill" imgSrc={dollar} value={142.55} />
             <div className=" bg-orange-700 w-full ">
               <h2 className=" font-mono text-very-dark-cyan">Select Tip %</h2>
               <div className=" grid grid-cols-2 grid-rows-3 gap-3">
@@ -52,21 +44,18 @@ function App() {
                 >
                   50%
                 </a>
-                {/* <button>5%</button>
-                <button>10%</button>
-                <button>15%</button>
-                <button>25%</button>
-                <button>50%</button> */}
-                <input type="number" placeholder="Custom" />
+                <input
+                  type="text"
+                  placeholder="Custom"
+                  className="w-full bg-white font-extrabold text-xl rounded text-center font-mono text-very-dark-cyan outline-none"
+                />
               </div>
             </div>
-            <form className="flex flex-col bg-blue-500">
-              <label>Number of people</label>
-              <div className="flex">
-                <img src={dollar} alt="dollar" />
-                <input type="number" value={0} className="w-full" />
-              </div>
-            </form>
+            <Input
+              labelText="Number of people %"
+              imgSrc={personIcon}
+              value={5}
+            />
           </div>
           <div className=" bg-green-600 w-full p-1 rounded-lg">
             <div className=" bg-yellow-400 flex justify-between items-center mb-3">
@@ -85,7 +74,7 @@ function App() {
           </div>
         </div>
       </div>
-    </di>
+    </div>
   );
 }
 
