@@ -7,14 +7,14 @@ function App() {
   return (
     <div>
       <div className="bg-[#C3E5E9] h-screen flex flex-col justify-center items-center p-5">
-        <h1 className="text-[#00484C] uppercase font-mono font-extrabold tracking-wide">
+        <h1 className="text-[#00484C] uppercase font-mono text-3xl tracking-wide tracking-wide">
           Spli <span className="block">tter</span>
         </h1>
-        <div className="bg-white customShadow rounded-lg p-6 mt-3  shadow-lg min-w-full flex flex-col justify-center items-center space-y-3">
-          <div className=" bg-red-700 w-full p-1 flex flex-col space-y-3">
+        <div className="bg-white customShadow rounded-2xl px-6 py-8 mt-3  shadow-lg min-w-full flex flex-col justify-center items-center space-y-3">
+          <div className="w-full p-1 flex flex-col space-y-3">
             <Input labelText="Bill" imgSrc={dollar} value={142.55} />
-            <div className=" bg-orange-700 w-full ">
-              <h2 className=" font-mono text-very-dark-cyan mb-2">
+            <div className="w-full ">
+              <h2 className=" font-mono text-grayish-cyan mb-2">
                 Select Tip %
               </h2>
               <div className=" grid grid-cols-2 grid-rows-3 gap-3">
@@ -26,7 +26,7 @@ function App() {
                 <input
                   type="text"
                   placeholder="Custom"
-                  className="w-full bg-white font-extrabold text-xl rounded text-center font-mono text-very-dark-cyan outline-none"
+                  className="w-full bg-[#F3F8FB] font-extrabold text-2xl rounded text-center customShadowInp font-mono text-very-dark-cyan outline-none"
                 />
               </div>
             </div>
