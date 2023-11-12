@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dollar from "./images/icon-dollar.svg";
 import personIcon from "./images/icon-person.svg";
 import PercentageButton from "./PercentageButton";
 import Input from "./Input";
 import DisplayAmount from "./DisplayAmount";
+
 const tipValues = [5, 10, 15, 25, 50];
+
 function App() {
   const [percentageTips, setPercentageTips] = useState(tipValues);
   const [bill, setBill] = useState(0);
@@ -16,34 +18,35 @@ function App() {
 
   const handleSelectTip = (tip_val) => {
     setSelectedTip(tip_val);
-    setCustomTip(tip_val);
+    setCustomTip(String(tip_val));
   };
+
   const customHandler = (e) => {
-    const customTipValue = e.target.value;
+    setCustomTip(e.target.value);
+  };
 
-    setCustomTip(customTipValue);
-
-    if (!isNaN(customTipValue)) {
+  useEffect(() => {
+    if (!isNaN(customTip)) {
       const selectedIndex = percentageTips.indexOf(selectedTip);
 
       if (selectedIndex !== -1) {
         const updatedTips = [...percentageTips];
-        updatedTips[selectedIndex] = customTipValue;
+        updatedTips[selectedIndex] = parseFloat(customTip);
 
         setPercentageTips(updatedTips);
-        setSelectedTip(customTipValue);
       }
     }
-  };
-  if (bill !== 0 && people !== 0) {
-    const tipAmount = ((bill * selectedTip) / people).toFixed(2);
-    setTipPerPerson(tipAmount);
-    const totalAmount = bill / people + tipAmount;
-    setTotalPerPerson(totalAmount);
-    console.log(tipAmount);
-  }
-  console.log(tipPerPerson);
-  console.log(totalPerPerson);
+  }, [customTip, percentageTips, selectedTip]);
+
+  useEffect(() => {
+    if (bill !== 0 && people !== 0) {
+      const tipAmount = (bill * (selectedTip / 100)) / people;
+      setTipPerPerson(tipAmount.toFixed(2));
+      const totalAmount = bill / people + tipAmount;
+      setTotalPerPerson(totalAmount.toFixed(2));
+    }
+  }, [bill, people, selectedTip]);
+
   return (
     <div>
       <div className="bg-[#C3E5E9] h-screen flex flex-col justify-center items-center p-5">
@@ -56,10 +59,7 @@ function App() {
               labelText="Bill"
               imgSrc={dollar}
               defaultValue={bill}
-              // Inside the onChange handlers for bill and people inputs
-              onChange={(e) =>
-                setBill(isNaN(e.target.value) ? 0 : parseFloat(e.target.value))
-              }
+              onChange={(e) => setBill(e.target.value)}
             />
 
             <div className="w-full ">
