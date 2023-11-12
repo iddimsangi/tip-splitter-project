@@ -1,45 +1,110 @@
+import { useState } from "react";
 import dollar from "./images/icon-dollar.svg";
 import personIcon from "./images/icon-person.svg";
 import PercentageButton from "./PercentageButton";
 import Input from "./Input";
 import DisplayAmount from "./DisplayAmount";
+const tipValues = [5, 10, 15, 25, 50];
 function App() {
+  const [percentageTips, setPercentageTips] = useState(tipValues);
+  const [bill, setBill] = useState(0);
+  const [people, setPeople] = useState(0);
+  const [selectedTip, setSelectedTip] = useState(0);
+  const [customTip, setCustomTip] = useState("");
+  const [tipPerPerson, setTipPerPerson] = useState(0);
+  const [totalPerPerson, setTotalPerPerson] = useState(0);
+
+  const handleSelectTip = (tip_val) => {
+    setSelectedTip(tip_val);
+    setCustomTip(tip_val);
+  };
+  const customHandler = (e) => {
+    const customTipValue = e.target.value;
+
+    setCustomTip(customTipValue);
+
+    if (!isNaN(customTipValue)) {
+      const selectedIndex = percentageTips.indexOf(selectedTip);
+
+      if (selectedIndex !== -1) {
+        const updatedTips = [...percentageTips];
+        updatedTips[selectedIndex] = customTipValue;
+
+        setPercentageTips(updatedTips);
+        setSelectedTip(customTipValue);
+      }
+    }
+  };
+  if (bill !== 0 && people !== 0) {
+    const tipAmount = ((bill * selectedTip) / people).toFixed(2);
+    setTipPerPerson(tipAmount);
+    const totalAmount = bill / people + tipAmount;
+    setTotalPerPerson(totalAmount);
+    console.log(tipAmount);
+  }
+  console.log(tipPerPerson);
+  console.log(totalPerPerson);
   return (
     <div>
       <div className="bg-[#C3E5E9] h-screen flex flex-col justify-center items-center p-5">
         <h1 className="text-[#00484C] uppercase font-mono text-3xl tracking-wide tracking-wide">
           Spli <span className="block">tter</span>
         </h1>
-        <div className="bg-white customShadow rounded-2xl px-6 py-8 mt-3  shadow-lg min-w-full flex flex-col justify-center items-center space-y-3">
+        <div className="bg-white customShadow rounded-2xl px-6 py-8 mt-3  shadow-lg w-full flex flex-col justify-center items-center space-y-3 md:flex-row md:space-y-0 md:space-x-3 md:max-w-5xl">
           <div className="w-full p-1 flex flex-col space-y-3">
-            <Input labelText="Bill" imgSrc={dollar} value={142.55} />
+            <Input
+              labelText="Bill"
+              imgSrc={dollar}
+              defaultValue={bill}
+              // Inside the onChange handlers for bill and people inputs
+              onChange={(e) =>
+                setBill(isNaN(e.target.value) ? 0 : parseFloat(e.target.value))
+              }
+            />
+
             <div className="w-full ">
               <h2 className=" font-mono text-grayish-cyan mb-2">
                 Select Tip %
               </h2>
               <div className=" grid grid-cols-2 grid-rows-3 gap-3">
-                <PercentageButton percentage={5} />
-                <PercentageButton percentage={10} />
-                <PercentageButton percentage={15} />
-                <PercentageButton percentage={25} />
-                <PercentageButton percentage={50} />
+                {percentageTips.map((tip) => (
+                  <PercentageButton
+                    key={tip}
+                    percentage={tip}
+                    onClick={() => handleSelectTip(tip)}
+                  />
+                ))}
                 <input
                   type="text"
                   placeholder="Custom"
-                  className="w-full bg-[#F3F8FB] font-extrabold text-2xl rounded text-center customShadowInp font-mono text-very-dark-cyan outline-none"
+                  value={customTip}
+                  onChange={customHandler}
+                  className="w-full bg-[#F3F8FB] font-extrabold text-2xl rounded text-center customShadowInp font-mono text-very-dark-cyan focus:ring-[#00CBAE]"
                 />
               </div>
             </div>
+
             <Input
               labelText="Number of people %"
               imgSrc={personIcon}
-              value={5}
+              defaultValue={people}
+              onChange={(e) => setPeople(e.target.value)}
             />
           </div>
-          <div className=" bg-very-dark-cyan w-full px-4 py-8 rounded-lg">
-            <DisplayAmount amountLabel={"Tip Amount"} amount={445} />
-            <DisplayAmount amountLabel={"Total"} amount={445} />
-            <button className=" bg-[#00CBAE] w-full text-very-dark-cyan font-extrabold mt-2  text-lg py-3 font-mono rounded-lg ">
+          <div className=" bg-very-dark-cyan w-full px-4 py-8 rounded-lg md:h-full">
+            <DisplayAmount amountLabel={"Tip Amount"} amount={tipPerPerson} />
+            <DisplayAmount amountLabel={"Total"} amount={totalPerPerson} />
+            <button
+              className="bg-[#00CBAE] w-full text-very-dark-cyan font-extrabold mt-2 text-lg py-3 font-mono rounded-lg md:mt-32"
+              onClick={() => {
+                setBill(0);
+                setPeople(0);
+                setSelectedTip(0);
+                setCustomTip("");
+                setTipPerPerson(0);
+                setTotalPerPerson(0);
+              }}
+            >
               Reset
             </button>
           </div>
