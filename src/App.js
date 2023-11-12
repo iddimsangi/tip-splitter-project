@@ -24,9 +24,10 @@ function App() {
   const customHandler = (e) => {
     setCustomTip(e.target.value);
   };
+  // ... (previous imports and code)
 
   useEffect(() => {
-    if (!isNaN(customTip)) {
+    if (customTip !== selectedTip) {
       const selectedIndex = percentageTips.indexOf(selectedTip);
 
       if (selectedIndex !== -1) {
@@ -34,9 +35,25 @@ function App() {
         updatedTips[selectedIndex] = parseFloat(customTip);
 
         setPercentageTips(updatedTips);
+        setSelectedTip(customTip);
       }
     }
   }, [customTip, percentageTips, selectedTip]);
+
+  // ... (rest of the code)
+
+  // useEffect(() => {
+  //   if (!isNaN(customTip)) {
+  //     const selectedIndex = percentageTips.indexOf(selectedTip);
+
+  //     if (selectedIndex !== -1) {
+  //       const updatedTips = [...percentageTips];
+  //       updatedTips[selectedIndex] = parseFloat(customTip);
+
+  //       setPercentageTips(updatedTips);
+  //     }
+  //   }
+  // }, [customTip, percentageTips, selectedTip]);
 
   useEffect(() => {
     if (bill !== 0 && people !== 0) {
